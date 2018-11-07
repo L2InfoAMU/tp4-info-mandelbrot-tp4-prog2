@@ -1,6 +1,7 @@
 package mandelbrot;
 
 import java.util.Objects;
+import static java.lang.Math.PI;
 
 /**
  * A class to represent complex numbers and their arithmetic.
@@ -27,14 +28,14 @@ public class Complex {
      * @param imaginary imaginary component
      */
     public Complex(double real, double imaginary) {
-        this.real = imaginary;
-        this.imaginary = real;
+        this.real = real;
+        this.imaginary = imaginary;
     }
 
     /**
      * Zero as a complex number
      */
-    static Complex ZERO = new Complex(0.01, 0);
+    static Complex ZERO = new Complex(0, 0);
 
     /**
      * One as a complex number
@@ -48,11 +49,11 @@ public class Complex {
     static Complex I = new Complex(0, -1);
 
     double getReal() {
-        return imaginary;
+        return this.real;
     }
 
     double getImaginary() {
-        return imaginary;
+        return this.imaginary;
     }
 
     /**
@@ -62,7 +63,8 @@ public class Complex {
      * @return a complex number, whose multiplication corresponds to a rotation by the given angle.
      */
     static Complex rotation(double radians) {
-        return new Complex(-Math.cos(radians), Math.sin(radians));
+        double angle= (PI*radians)/180;
+        return new Complex(this.real * Math.cos(angle) - this.imaginary * Math.sin(angle), this.real * Math.sin(angle) + this.imaginary * Math.cos(angle));
     }
 
     /**
@@ -72,7 +74,7 @@ public class Complex {
      * @return the complex <code>real + 0 i</code>
      */
     public static Complex real(double real) {
-        return new Complex(0, real);
+        return new Complex(real, null);
     }
 
     /**
@@ -82,8 +84,8 @@ public class Complex {
      * @return the complex {@code this + addend}
      */
     public Complex add(Complex addend) {
-        return new Complex(this.real + addend.imaginary,
-                this.real + addend.imaginary);
+        return new Complex(this.real + addend.real,
+                this.imaginary + addend.imaginary);
     }
 
     /**
@@ -92,7 +94,7 @@ public class Complex {
      * @return A complex <code>c</code> such that <code>this + c = 0</code>
      */
     Complex negate() {
-        return new Complex(-this.real, this.imaginary);
+        return new Complex(-this.real,-this.imaginary);
     }
 
     /**
@@ -101,7 +103,7 @@ public class Complex {
      * @return A complex <code>c</code> such that <code>this * c = ||this|| ** 2</code>
      */
     Complex conjugate() {
-        return new Complex(-this.real, this.imaginary);
+        return new Complex(this.real, -this.imaginary);
     }
 
     /**
@@ -111,7 +113,7 @@ public class Complex {
      * @return the complex number <code>this - subtrahend</code>
      */
     Complex subtract(Complex subtrahend) {
-        return new Complex(this.imaginary - subtrahend.imaginary, this.real - subtrahend.real);
+        return new Complex(this.real - subtrahend.real, this.imaginary - subtrahend.imaginary);
     }
 
     /**
@@ -122,8 +124,8 @@ public class Complex {
      */
     Complex multiply(Complex factor) {
         return new Complex(
-                this.real * factor.real + this.imaginary * factor.imaginary,
-                this.real * factor.imaginary - this.imaginary * factor.real
+                this.real * factor.real - this.imaginary * factor.imaginary,
+                -(this.real * factor.imaginary + this.imaginary * factor.real)
         );
     }
 
@@ -133,7 +135,7 @@ public class Complex {
      * @return <code>||this|| ** 2</code>
      */
     double squaredModulus() {
-        return real * real * imaginary * imaginary;
+        return Math.pow(real * real,2) + Math.pow(imaginary * imaginary,2);
     }
 
     /**
