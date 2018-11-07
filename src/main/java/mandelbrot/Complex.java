@@ -63,9 +63,7 @@ public class Complex {
      * @return a complex number, whose multiplication corresponds to a rotation by the given angle.
      */
     static Complex rotation(double radians) {
-        double angle= (PI*radians)/180;
-        return new Complex(this.real * Math.cos(angle) - this.imaginary * Math.sin(angle), this.real * Math.sin(angle) + this.imaginary * Math.cos(angle));
-    }
+        return new Complex(Math.cos(radians), Math.sin(radians));    }
 
     /**
      * Creates a complex number with null imaginary part
@@ -74,7 +72,7 @@ public class Complex {
      * @return the complex <code>real + 0 i</code>
      */
     public static Complex real(double real) {
-        return new Complex(real, null);
+        return new Complex(real, 0);
     }
 
     /**
