@@ -150,6 +150,14 @@ public class ComplexTest {
     }
 
     @Test
+    void testReal(){
+        assertEquals(new Complex(-3,0), new Complex(0,0).real(-3));
+        assertEquals(new Complex(6,0), new Complex(0,0).real(6));
+        assertEquals(Complex.ZERO, new Complex(0,0).real(0));
+    }
+
+
+    @Test
     void testEquals(){
         assertTrue(oneMinusI.equals(oneMinusI));
         assertFalse(two.equals(twoI));
