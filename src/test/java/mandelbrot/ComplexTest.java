@@ -53,6 +53,7 @@ public class ComplexTest {
         assertEquals(1, Complex.I.getImaginary());
     }
 
+
     @Test
     void testZero(){
         assertEquals(0, Complex.ZERO.getReal());
@@ -97,6 +98,20 @@ public class ComplexTest {
     }
 
     @Test
+    void testSquareModulus(){
+        assertEquals(4,two.squaredModulus());
+        assertEquals(2,oneMinusI.squaredModulus());
+        assertEquals(1,minusOne.squaredModulus());
+    }
+
+    @Test
+    void testModulus(){
+        assertEquals(2,two.modulus());
+        assertEquals(5,new Complex(0,-5).modulus());
+        assertEquals(1,minusOne.modulus());
+    }
+
+    @Test
     void testMultiply(){
         assertEquals(onePlusI, onePlusI.multiply(Complex.ONE));
         assertEquals(new Complex(-1, 1), minusOne.multiply(oneMinusI));
@@ -132,6 +147,20 @@ public class ComplexTest {
                 Complex.rotation(Math.PI/4));
         assertEquals(new Complex(1./2., Math.sqrt(3)/2.),
                 Complex.rotation(Math.PI/3));
+    }
+
+    @Test
+    void testEquals(){
+        assertTrue(oneMinusI.equals(oneMinusI));
+        assertFalse(two.equals(twoI));
+        assertFalse(two.equals("bonjours"));
+    }
+
+    @Test
+    void testScale(){
+        assertEquals(two, Complex.ONE.scale(2));
+        assertEquals(new Complex(-2,2), oneMinusI.scale(-2));
+        assertEquals(Complex.ZERO, Complex.ONE.scale(0));
     }
 
     @Test
