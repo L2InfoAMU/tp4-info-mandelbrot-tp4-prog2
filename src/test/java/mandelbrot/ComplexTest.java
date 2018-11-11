@@ -2,9 +2,7 @@ package mandelbrot;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ComplexTest {
     private final Complex onePlusI = new Complex(1,1);
@@ -80,6 +78,14 @@ public class ComplexTest {
     @Test
     void testReciprocalOfZero(){
         assertThrows(ArithmeticException.class, ()->Complex.ZERO.reciprocal());
+    }
+
+    @Test
+    void testAdd(){
+        assertEquals(Complex.ONE, Complex.ZERO.add(Complex.ONE));
+        assertEquals(two, oneMinusI.add(onePlusI));
+        assertEquals(new Complex(real+1,imaginary+1),
+                new Complex(real, imaginary).add(onePlusI));
     }
 
     @Test
