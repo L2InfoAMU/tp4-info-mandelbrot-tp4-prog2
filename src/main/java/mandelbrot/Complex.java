@@ -1,7 +1,6 @@
 package mandelbrot;
 
 import java.util.Objects;
-import static java.lang.Math.PI;
 
 /**
  * A class to represent complex numbers and their arithmetic.
@@ -183,9 +182,12 @@ public class Complex {
      * @return the complex number <code>this ** p</code>
      */
     Complex pow(int p) {
+        //if (p < 0)
+        //    throw new ArithmeticException("p is negative, it has to be a non-negative number");
         if (p == 0)
             return ONE;
-        Complex result = (this.multiply(this)).pow(p / 2);
+        Complex result = this;
+        result = (result.multiply(result)).pow(p / 2);
         if (p % 2 == 1)
             result = result.multiply(this);
         return result;
