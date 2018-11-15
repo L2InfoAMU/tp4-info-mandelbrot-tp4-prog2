@@ -165,6 +165,17 @@ public class ComplexTest {
     }
 
     @Test
+    void testPow(){
+        assertEquals(new Complex(4,0), two.pow(2));
+        assertEquals(new Complex(0,-8), new Complex(-2,2).pow(2));
+    }
+
+    @Test
+    void testPowNegative(){
+        assertThrows(ArithmeticException.class, ()->Complex.ONE.pow(-2));
+    }
+
+    @Test
     void testScale(){
         assertEquals(two, Complex.ONE.scale(2));
         assertEquals(new Complex(-2,2), oneMinusI.scale(-2));
